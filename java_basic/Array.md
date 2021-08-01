@@ -1,82 +1,127 @@
 
-# ¹è¿­
+# ë°°ì—´
 
--°°ÀºÅ¸ÀÔ ÀÇ ¿©·¯ º¯¼ö¸¦ ÇÏ³ªÀÇ ¹­À½À¸·Î ´Ù·ç´Â °ÍÀ» '¹è¿­(array)'ÀÌ¶ó°í ÇÑ´Ù.
+-ê°™ì€íƒ€ìž… ì˜ ì—¬ëŸ¬ ë³€ìˆ˜ë¥¼ í•˜ë‚˜ì˜ ë¬¶ìŒìœ¼ë¡œ ë‹¤ë£¨ëŠ” ê²ƒì„ 'ë°°ì—´(array)'ì´ë¼ê³  í•œë‹¤.
  
 
-##¹è¿­ÀÇ ¼±¾ð ¹æ¹ý 
+##ë°°ì—´ì˜ ì„ ì–¸ ë°©ë²• 
 	
-	Å¸ÀÔ [] º¯¼öÀÌ¸§ ;     ¼±¾ð ¿¹ ) int[] score; 
+	íƒ€ìž… [] ë³€ìˆ˜ì´ë¦„ ;     ì„ ì–¸ ì˜ˆ ) int[] score; 
 							   String[] name;
 							   
-	Å¸ÀÔ º¯¼öÀÌ¸§[];		¼±¾ð ¿¹) int score[];
+	íƒ€ìž… ë³€ìˆ˜ì´ë¦„[];		ì„ ì–¸ ì˜ˆ) int score[];
 							   int String[];
 							   
 
 
-## ¹è¿­ÀÇ »ý¼º
-	¹è¿­ÀÇ ¼±¾ðÇÑ ´ÙÀ½¿¡´Â ¹è¿­À» »ý¼ºÇØ¾ßÇÑ´Ù. 
-	Å¸ÀÔ[] º¯¼öÀÌ¸§;			//¹è¿­À» ¼±¾ð(¹è¿­À» ´Ù·ç±â À§ÇÑ ÂüÁ¶º¯¼ö ¼±¾ð)
-	º¯¼öÀÌ¸§ = new Å¸ÀÔ[±æÀÌ]; // ¹è¿­À» »ý¼º (½ÇÁ¦ ÀúÀå°ø°£À» »ý¼º)
+## ë°°ì—´ì˜ ìƒì„±
+	ë°°ì—´ì˜ ì„ ì–¸í•œ ë‹¤ìŒì—ëŠ” ë°°ì—´ì„ ìƒì„±í•´ì•¼í•œë‹¤. 
+	íƒ€ìž…[] ë³€ìˆ˜ì´ë¦„;			//ë°°ì—´ì„ ì„ ì–¸(ë°°ì—´ì„ ë‹¤ë£¨ê¸° ìœ„í•œ ì°¸ì¡°ë³€ìˆ˜ ì„ ì–¸)
+	ë³€ìˆ˜ì´ë¦„ = new íƒ€ìž…[ê¸¸ì´]; // ë°°ì—´ì„ ìƒì„± (ì‹¤ì œ ì €ìž¥ê³µê°„ì„ ìƒì„±)
 	
-	int[] score; 		//int Å¸ÀÔÀÇ ¹è¿­À» ´Ù·ç±â À§ÇÑ ÂüÁ¶º¯¼ö score¼±¾ð
-	score = new int[5]	// int Å¸ÀÔÀÇ °ª 5°³¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â ¹è¿­
+	int[] score; 		//int íƒ€ìž…ì˜ ë°°ì—´ì„ ë‹¤ë£¨ê¸° ìœ„í•œ ì°¸ì¡°ë³€ìˆ˜ scoreì„ ì–¸
+	score = new int[5]	// int íƒ€ìž…ì˜ ê°’ 5ê°œë¥¼ ì €ìž¥í•  ìˆ˜ ìžˆëŠ” ë°°ì—´
 	
-	´ÙÀ½°ú °°ÀÌ ¹è¿­ÀÇ ¼±¾ð°ú »ý¼ºÀ» µ¿½Ã¿¡ ÇÏ¸é °£·«È÷ ÇÑ ÁÙ·Î ÇÒ ¼ö ÀÖ´Âµ¥, ´ëºÎºÐÀÇ °æ¿ì ÀÌ·¸°ÔÇÑ´Ù.
+	ë‹¤ìŒê³¼ ê°™ì´ ë°°ì—´ì˜ ì„ ì–¸ê³¼ ìƒì„±ì„ ë™ì‹œì— í•˜ë©´ ê°„ëžµížˆ í•œ ì¤„ë¡œ í•  ìˆ˜ ìžˆëŠ”ë°, ëŒ€ë¶€ë¶„ì˜ ê²½ìš° ì´ë ‡ê²Œí•œë‹¤.
 	
-	Å¸ÀÔ[] º¯¼öÀÌ¸§ = new Å¸ÀÔ[±æÀÌ]; //¹è¿­ÀÇ ¼±¾ð°ú »ý¼ºÀ» µ¿½Ã¿¡ 
-	int[] score = new int[5] ; 	// ±æÀÌ 5ÀÎ int¹è¿­
+	íƒ€ìž…[] ë³€ìˆ˜ì´ë¦„ = new íƒ€ìž…[ê¸¸ì´]; //ë°°ì—´ì˜ ì„ ì–¸ê³¼ ìƒì„±ì„ ë™ì‹œì— 
+	int[] score = new int[5] ; 	// ê¸¸ì´ 5ì¸ intë°°ì—´
 	
- 	<»çÁø1-1>
+<img src= "https://user-images.githubusercontent.com/56623911/127775168-a17c9ce1-e35c-4eda-84c8-d80baf42888b.png">
+
+
 
 1. int[] score; 
 
-	intÇü ¹è¿­ ÂüÁ¶º¯¼ö score¸¦ ¼±¾ðÇÑ´Ù. µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â °ø°£Àº ¾ÆÁ÷ ¸¶·ÃµÇÁö ¾Ê¾Ò´Ù.
+	intí˜• ë°°ì—´ ì°¸ì¡°ë³€ìˆ˜ scoreë¥¼ ì„ ì–¸í•œë‹¤. ë°ì´í„°ë¥¼ ì €ìž¥í•  ìˆ˜ ìžˆëŠ” ê³µê°„ì€ ì•„ì§ ë§ˆë ¨ë˜ì§€ ì•Šì•˜ë‹¤.
 	
-	<»çÁø1>
+	<img src= "https://user-images.githubusercontent.com/56623911/127775659-967f61c9-a45a-475f-a3b0-3c11884cc0a5.png">
+
 	
 	
 2. score = new int[5];
 
-	¿¬»êÀÚ'new'¿¡ ÀÇÇØ¼­ ¸Þ¸ð¸®ÀÇ ºó °ø°£¿¡ 5°³ÀÇ intÇü µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â °ø°£ÀÌ ¸¶·ÃµÈ´Ù.
+	ì—°ì‚°ìž'new'ì— ì˜í•´ì„œ ë©”ëª¨ë¦¬ì˜ ë¹ˆ ê³µê°„ì— 5ê°œì˜ intí˜• ë°ì´í„°ë¥¼ ì €ìž¥í•  ìˆ˜ ìžˆëŠ” ê³µê°„ì´ ë§ˆë ¨ëœë‹¤.
 	
-	<»çÁø2>
+	<img src="https://user-images.githubusercontent.com/56623911/127775672-82307e7c-df1a-4a08-b6a1-7fe2fba458cf.png">
 	
-	±×¸®°í °¢ ¹è¿­¿ä¼Ò´Â ÀÚµ¿ÀûÀ¸·Î intÀÇ ±âº»°ª(default)ÀÎ 0À¸·Î ÃÊ±âÈ­ µÈ´Ù.
+	ê·¸ë¦¬ê³  ê° ë°°ì—´ìš”ì†ŒëŠ” ìžë™ì ìœ¼ë¡œ intì˜ ê¸°ë³¸ê°’(default)ì¸ 0ìœ¼ë¡œ ì´ˆê¸°í™” ëœë‹¤.
 	
-	<»çÁø3>
+	<img src="https://user-images.githubusercontent.com/56623911/127775695-ade907e1-e518-482a-a078-3eca5e4a3047.png">
+
 	
-	³¡À¸·Î ´ëÀÔ ¿¬»êÀÚ '='¿¡ ÀÇÇØ ¹è¿­ÀÇ ÁÖ¼Ò°¡ intÇü ¹è¿­ ÂüÁ¶º¯¼ö score¿¡ ÀúÀåµÈ´Ù.
+	ëìœ¼ë¡œ ëŒ€ìž… ì—°ì‚°ìž '='ì— ì˜í•´ ë°°ì—´ì˜ ì£¼ì†Œê°€ intí˜• ë°°ì—´ ì°¸ì¡°ë³€ìˆ˜ scoreì— ì €ìž¥ëœë‹¤.
 	
-	<»çÁø4>
+	<img src="https://user-images.githubusercontent.com/56623911/127775744-a1a1bd15-38e3-46e1-942b-8a341e439774.png">
+
+
 	
-ÀÌÁ¦ ÂüÁ¶º¯¼ö score¸¦ ÅëÇØ¼­ »ý¼ºµÈ ¹è¿­¿¡ °ªÀ» ÀúÀåÇÏ°Å³ª ÀÐ¾î ¿Ã ¼ö ÀÖ´Ù. 
-ÀÌ ¹è¿­Àº '±æÀÌ 5ÀÎ int¹è¿­'ÀÌ¸ç, ÂüÁ¶º¯¼öÀÇ ÀÌ¸§À» µû¼­ '¹è¿­ score'¶ó°í ºÎ¸£¸é µÈ´Ù.
+ì´ì œ ì°¸ì¡°ë³€ìˆ˜ scoreë¥¼ í†µí•´ì„œ ìƒì„±ëœ ë°°ì—´ì— ê°’ì„ ì €ìž¥í•˜ê±°ë‚˜ ì½ì–´ ì˜¬ ìˆ˜ ìžˆë‹¤. 
+ì´ ë°°ì—´ì€ 'ê¸¸ì´ 5ì¸ intë°°ì—´'ì´ë©°, ì°¸ì¡°ë³€ìˆ˜ì˜ ì´ë¦„ì„ ë”°ì„œ 'ë°°ì—´ score'ë¼ê³  ë¶€ë¥´ë©´ ëœë‹¤.
 
 	
 				
-## ¹è¿­ÀÇ ±æÀÌ¿Í ÀÎµ¦½º	
+## ë°°ì—´ì˜ ê¸¸ì´ì™€ ì¸ë±ìŠ¤	
 
-	»ý¼ºµÈ ¹è¿­ÀÇ °¢ ÀúÀå°ø°£À» '¹è¿­ÀÇ ¿ä¼Ò(element)'¶ó°í ÇÏ¸ç, '¹è¿­ÀÌ¸§[ÀÎµ¦½º]'ÀÇ Çü½ÄÀ¸·Î ¹è¿­ÀÇ ¿ä¼Ò¿¡ Á¢±ÙÇÑ´Ù.
-	ÀÎµ¦½º(index)´Â ¹è¿­ÀÇ ¿ä¼Ò¸¶´Ù ºÙ¿©Áø ÀÏ·Ã¹øÈ£·Î °¢ ¿ä¼Ò¸¦ ±¸º°ÇÏ´Âµ¥ »ç¿ëµÈ´Ù.
+	ìƒì„±ëœ ë°°ì—´ì˜ ê° ì €ìž¥ê³µê°„ì„ 'ë°°ì—´ì˜ ìš”ì†Œ(element)'ë¼ê³  í•˜ë©°, 'ë°°ì—´ì´ë¦„[ì¸ë±ìŠ¤]'ì˜ í˜•ì‹ìœ¼ë¡œ ë°°ì—´ì˜ ìš”ì†Œì— ì ‘ê·¼í•œë‹¤.
+	ì¸ë±ìŠ¤(index)ëŠ” ë°°ì—´ì˜ ìš”ì†Œë§ˆë‹¤ ë¶™ì—¬ì§„ ì¼ë ¨ë²ˆí˜¸ë¡œ ê° ìš”ì†Œë¥¼ êµ¬ë³„í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.
 	
-	<»çÁø5>
-	
-	
-	¹è¿­¿¡ °ªÀ» ÀúÀåÇÏ°í ÀÐ¾î¿À´Â ¹æ¹ýÀº º¯¼ö¿Í °°´Ù. ´ÜÁö º¯¼öÀ¸¸§ ´ë½Å '¹è¿­ÀÌ¸§[ÀÎµ¦½º]'¸¦ »ç¿ëÇÑ´Ù´Â Á¡¸¸ ´Ù¸£´Ù.
-	
-	score[3] = 100;		// ¹è¿­ scoreÀÇ 4¹øÂ° ¿ä¼Ò¿¡ 100À» ÀúÀåÇÑ´Ù.
-	int value = score[3]	//¹è¿­ scoreÀÇ 4¹øÂ° ¿ä¼Ò¿¡ ÀúÀåµÈ °ªÀ» ÀÐ¾î¼­ value¿¡ ÀúÀå
-	
-	
-	¨ç score[] = 100;		//¹è¿­ scoreÀÇ 4¹øÂ° ¿ä¼Ò¿¡ 100À» ÀúÀåÇÑ´Ù.
+<img src = "https://user-images.githubusercontent.com/56623911/127776019-7d5e4174-e757-4612-92ab-8a849d2d578e.png">
 
-	<»çÁø6>
 	
-	¨è int value = score[3];		//¹è¿­ scoreÀÇ 4¹øÂ° ¿ä¼ÒÀÇ °ªÀ» ÀÐ¾î¼­ value¿¡ ÀúÀå.
 	
-	<»çÁø7>
+	ë°°ì—´ì— ê°’ì„ ì €ìž¥í•˜ê³  ì½ì–´ì˜¤ëŠ” ë°©ë²•ì€ ë³€ìˆ˜ì™€ ê°™ë‹¤. ë‹¨ì§€ ë³€ìˆ˜ìœ¼ë¦„ ëŒ€ì‹  'ë°°ì—´ì´ë¦„[ì¸ë±ìŠ¤]'ë¥¼ ì‚¬ìš©í•œë‹¤ëŠ” ì ë§Œ ë‹¤ë¥´ë‹¤.
 	
+	score[3] = 100;		// ë°°ì—´ scoreì˜ 4ë²ˆì§¸ ìš”ì†Œì— 100ì„ ì €ìž¥í•œë‹¤.
+	int value = score[3]	//ë°°ì—´ scoreì˜ 4ë²ˆì§¸ ìš”ì†Œì— ì €ìž¥ëœ ê°’ì„ ì½ì–´ì„œ valueì— ì €ìž¥
+	
+	
+	1) score[] = 100;		//ë°°ì—´ scoreì˜ 4ë²ˆì§¸ ìš”ì†Œì— 100ì„ ì €ìž¥í•œë‹¤.
+
+<img src = "https://user-images.githubusercontent.com/56623911/127776179-637045b3-b008-42a5-ba1e-9e01f53a4b60.png">
+
+	
+	2)int value = score[3];		//ë°°ì—´ scoreì˜ 4ë²ˆì§¸ ìš”ì†Œì˜ ê°’ì„ ì½ì–´ì„œ valueì— ì €ìž¥.
+	
+
+<img src = "https://user-images.githubusercontent.com/56623911/127776263-7af823f3-b333-491a-8fd2-c463585707c8.png">
+
+	
+
+## ë°°ì—´ì˜ ì´ˆê¸°í™”
+
+ë°°ì—´ì€ ìƒì„±ê³¼ ë™ì‹œì— ìžë™ì ìœ¼ë¡œ ìžì‹ ì˜ íƒ€ìž…ì— í•´ë‹¹í•˜ëŠ” ê¸°ë³¸ê°’ìœ¼ë¡œ ì´ˆê¸°í™”ë˜ë¯€ë¡œ 
+ë°°ì—´ì„ ì‚¬ìš©í•˜ê¸° ì „ì— ë”°ë¡œ ì´ˆê¸°í™”ë¥¼ í•´ì£¼ì§€ ì•Šì•„ë„ëœë‹¤. ì›í•˜ëŠ” ê°’ì„ ë„£ì„ë ¤ë©´ ì•„ëž˜ì™€ ê°™ì´í•˜ë©´ëœë‹¤.
+
+```java
+int[] score = new int[5];
+score[0] = 50;
+score[1] = 60;
+score[2] = 70;
+score[3] = 80;
+score[4] = 90;
+```
+----------------------------------------------------------------------------
+ë°°ì—´ì˜ ê¸¸ì´ê°€ í° ê²½ìš°ì—ëŠ” forë¬¸ ì‚¬ìš©
+
+```java
+int[] score = new int[5];	//ê¸¸ì´ê°€ 5ì¸ intí˜• ë°°ì—´ì„ ìƒì„±í•œë‹¤.
+
+for(int i = 0; i < score.length; i++){
+	score[i] = i * 10 + 50;
+}
+```
+
+â€»ì£¼ì˜ forë¬¸ì€ ê°’ì— ì¼ì •í•œ ê·œì¹™ì´ ìžˆì–´ì•¼ë§Œ ê°€ëŠ¥
+
+---------------------------------------------------------------------------------
+
+
+ë°°ì—´ì„ ê°„ë‹¨ížˆ ì´ˆê¸°í™” í•  ìˆ˜ ìžˆëŠ” ë°©ë²•
+
+```java
+int[] score = new int[] {50, 60, 70, 80, 90};	//ë°°ì—´ì˜ ìƒì„±ê³¼ ì´ˆê¸°í™”ë¥¼ ë™ì‹œì— 
+```
 	
 	
 
