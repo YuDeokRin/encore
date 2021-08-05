@@ -1,0 +1,221 @@
+Day003 
+	
+9:20분 시작
+
+jdk 설명
+https://docs.oracle.com/javase/8/docs/technotes/guides/index.html#jre-jdk
+
+
+
+	이클립스 다운로드
+
+config.ini 확장자 
+- 기본적으로 윈도우 갖고 있는 초기 설정 파일
+
+
+artifacts.xml 파일안에서 설명
+
+메타에대한 내용
+
+TAG =  META           TAG   = 꾸며주는 태그
+	<속성의 정보>
+
+
+엘리먼트 vs 태그  차이
+
+-------------------------------------------------------------
+
+eclipse.ini  파일 
+
+Xms256m << 최소 용량메모리
+Xmx2048m << 최대 용량메모리
+
+-Dosgi.instance.area.default=@user.home/eclipse-workspace  << 작업공간 경로설정
+
+javaWork <<작업공간
+.metadata 
+.lock << 락이 내 프로젝트를 잠금하기때문에 라이브러리 삭제못한다.
+#은 << 주석 
+
+
+
+===============================================================
+
+자바과정
+.java -> .class -> package -> project -> jar
+
+=================================================================
+이클립스 과정
+
+project -> package 				-> java 
+	   서울시.강남구.도곡동			   class 47번지{}
+
+package 만드는 이유 
+1.보안
+2.namespace 때문에
+
+=================================================================
+
+
+
+10:45분
+이클립스 설명 
+
+Task List  - 클래스 목록 
+
+자동정렬 ctrl + shitf+ s
+
+
+
+
+=========================================
+
+
+test ->변수 
+
+test() -> 함수 function()
+
+Test.test() -> 메소드 Method()
+
+=====================================================
+
+
+class = 자료형 = 자바의 실행단위 
+
+class =  값 + 기능
+
+class =  속성 + 메소드
+
+class =  static final + user_method()
+
+
+[선언]
+  접근제한자 class userName{  }
+
+
+
+
+
+==============================================================
+
+static  vs non-static
+
+static : 클래스명.메소드명()
+
+non-static : 객체.메소드명()
+
+
+static
+메소드, 클래스주소	메소드이름	index
+&Test			Test(c)		0
+&Test.Prn()		Test.Prn()	1
+&Test.main()		Test.main(0	2
+
+
+no-static (인스턴스 메소드)
+Test.disp()		Test.disp()	3
+
+
+
+os = m/m = memory map(cs, ds.static heap, stack)
+
+cs(code segment) : 코드를 관리하는 영역
+ds(data segment) : 값을 관리하는 영역
+
+static : 정적 영역으로 class, union, struct, static, user_function() 등이 선언되면 관리되는 영역으로 
+	 선언과 동시에 주소를 가지면서 bind된다. 
+
+
+heap : 자유영역 공간 = 동적할당 공간
+	프로그램 실행시에 다른 프로세스가 실행되지 않은 공간을 할당 받아 실행되고 (동적할당 = 생성 = new) 
+	실행이 끝나면 소거 되는 공간(소멸, GC(가비지컬렉터)영역) 
+
+stack : 고정영역으로 지역변수, 지역 값 등을 고정적으로 관리하는 영역
+
+
+
+OOP(Object-Oriented Programming Concepts)의 특징 : 클래스, 상속, 다형성 
+
+자바의 클래스 
+접근 제한자 [abstract, final=상속 ] class UserName{
+
+	속성 (값) + 메소드(기능) _ [static , non-static], [abstract, final] [void, dataType]
+}
+
+ex) public static final void Prn() { } 
+
+ex) public void Disp() { }
+
+ex) public int Prn() {retrun 100; }
+
+=====================================================
+클래스 멤버 중  static void 형 메소드
+  [형식]
+  	접근제한자 static void UserName(매개인자,,,,){
+  	명령; 
+  	}
+  	
+[호출]
+	class명.userName(); //클래스명.메소드명();
+	
+========================================================
+
+
+boolean 			, 정수, 			실수, 		문자, 		문자열
+true, false 		, 소수없는 수  	소수점 지수 	' ' 		" "
+
+==========================================================
+
+값을 출력하는 표준 출력 메소드 
+print();	:줄바꿈x
+println();	:줄바꿈
+printf();	:포맷지정
+
+public PrintStream printf(String format, Object... args)
+
+... << 하나 이상이라는 뜻
+
+=================================================
+
+
+byte(1) -> short(2) -> int(4) -> long(8) -> float(4) -> double(8)
+		   char(2)  ->
+		
+=====================================================
+
+0,1 -> bit  *8 = 8bit -> 1byte = -128  ~ 127
+
+
+
+
+=================================================
+
+명시형변환 : 큰데이터의 타입의 자료형을 작은 데이터타입의 변수에게 전달할 때 해당 데이터 타입으로 선언해 주는 것
+
+자동형변환 : 작은 데이터의 타입에 자료형을 큰 데이터타입의 변수에 전달이 자동으로 이루어 지는 것
+
+	double d = 100 ; // d(8byte) = 100(4);   --> 100.0
+	
+	float f = 90.4 // f(4byte) = 90.4(8byte); -->
+	
+
+=====================================================
+
+class명 클래스변수 = new 생성자();  -> 주소 생성 
+
+
+formatterl.format ()
+
+
+====================================================
+
+		|						&							^
+	A	B					A	B							A	B
+	0	0	= 0				0	0	= 0						0	0	= 0
+	1	0	= 1				1	0	= 0						1	0	= 1
+	0	1	= 1				0	1	= 0						0	1	= 1
+	1	1	= 1				1	1	= 1						1	1	= 0
+
+	
+	
+	
