@@ -1,5 +1,5 @@
 
-# 자바의 정석 3rd Edition
+# 자바의 정석 3rd Edition & 생활코딩 Java
 
 ## 2021.08.01부터 ~
 
