@@ -1,0 +1,79 @@
+# Day15
+
+
+## 2021.08.10
+
+## 오늘 수업 목표 
+1) 문자열 관리 클래스 객체를 살펴 보고 구현할 수 있다.
+
+2) 쓰레드와 프로세스의 차이를 설명 할 수 있다.
+
+3) 스레드와 동기화 및 Object 클래스의 메소드를 이용해서 스레딩의 원리를 해석할 수 있다.
+
+------------------------------------------------------------
+
+com.test: String, StringBuffer, StringBulider 클래스를 활용 
+	불변성(immutable) : 생성된 동일 객체를 Update, Delete를 못하는 것.
+	가변성(mutable) : 생성된 동일 객체를 Update, Delete를 할 수 있는 것. 
+		1) String : 자바에서는 문자열을 위한 클래스를 제공한다. 그것이 바로 String 클래스인데, String클래스는 문자열을 저장하고 이를 다루는데 필요한 메서드를 제공한다.
+					Create_변경 불가능한(immutable) 불변성 갖고있다, 문자열 생성 
+					인스턴스 생성 시 생성자의 매개변수로 입력받는 문자열은 이 이스턴스변수(value)에 문자형 배열(char[])로 저장되는 것이다.
+					
+					<사진1>
+					덧셈연산자처럼 '+'를 사용해서 문자열을 결합하는 것은 매 연산 시 마다 새로운 문자열을 가진 String인스턴스가 생성되어 메모리공간에 차지하게 되므로 가능한 한 결합 횟수를 줄이는 것이 좋다.
+					
+					<사진2>
+					str1 == str2 					str3 == str4
+					0x100 == 0x100 					0x200 == 0x300
+						true							false
+					String str1 = "abc" // 문자열 리터럴 "abc"의 주소가 str1에 저장됨
+					String str2 = "abc" // 문자열 리터럴 "abc"의 주소가 str2에 저장됨
+					String str3 = new String("abc") // 새로운 String인스턴스를 생성
+					String str4 = new String("abc") // 새로운 String인스턴스를 생성
+					
+					String클래스의 생성자를 이용한 경우에는 new연산자에 의해서 메모리할당이 이루어지기 때문에 항상 새로운 String인스턴스가 생성된다.
+					
+					
+		
+		2) StringBuffer : CRUD_가변성, 문자열 생성, 추가, 삭제 등의 문자열 연산, 동기화, 다중스레드
+						  ex)멀티 채팅, 멀티 게임, 멀티 스레드  
+		3) StringBuilder : CRUD_가변성, 문자열 생성, 추가, 삭제 등의 문자열 연산, 동기화가 되지 않는다.
+							동기화가 되지 않는다
+						  ex) 단일 게임, 단일 스레드 
+							
+com.test01 : 사용자 정렬 코드를 작성해 보자. 
+
+static int compare(int x, int y)
+int compareTo(Integer anotherInteger)
+
+
+static <T extends Object & Comparable<? super T>>
+							void sort(List<T> list)
+
+static <T> void  sort (List<T> list, Comparable<? super T> c)
+
+com.test02 : 프로세스 연동 방법을 이해하자.
+
+com.test03 : 스레드 기본 구현법 2가지와 스레드 클래스의 메소드 활용 
+	class 단위로 실행되는 Process
+	method 단위로 실행되는 Thread
+	
+   ---------------------------------------------------
+	1) Interface Runnable : run() -> Thread로 실행되는 메소드 (start())
+		Runnable를 implements 해서 run()이라는 재정의 메소드에 명령을 기재하고 
+		Thread 클래스의 생성자를 통해서 Thread로 만들어 start()메소드로 실행 한다.
+		
+	
+	2) class	Thread	: run() -> Thread로 실행되는 메소드 (start())
+						Thread의 실행 시 속성값들을 리턴, 제어, 흐름 주기를 스케쥴링 등의 메소드를 추가한 확장형 클래스 
+	-Thread라는 클래스를 extends 해서 run()이라는 재정의 메소드에 명령을 기재하고 
+	객체 생성 후  start()메소드로 실행한다.
+	
+
+
+
+
+
+
+
+
