@@ -1,0 +1,67 @@
+#Day16
+
+
+## 2021.08.11
+
+
+### 오늘의 학습목표
+ 
+1. join과 sleep메소드를 이용해서 대기 및 스레드 중단에 대한 구문을 해석할 수 있다.
+
+2. 스레드와 동기화 및 Object 클래스의 메소드를 이용해서 스레딩의 원리를 해석할 수 있다.
+
+3. 네트워크 구문에 대한 전반적인 이해를 할 수 있다.
+
+4. UDP/TCP의 작동원리를 구분할 수 있다.
+
+5.java.net의 클래스들을 이해하고 설명 할 수 있으며 소켓에 대한 개념을 설명할 수 있다.
+
+
+--------------------------------------------------------
+
+### com.test : join / sleep에 메소드 활용 
+join() : 다른 스레드의 처리가 끝날 때 까지 대기 시키고 싶을 때 처리하는 경우에 사용된다.
+sleep() : 스레드 중단
+
+주의할점 : 교착상태 
+ 	  -join(long millis)로 시간을 지정하게 되면 지정된 시간이 지나면 
+	    쓰레드가 실행 중이더라도 다음 작업을 수행하게 된다.
+	    
+	   -만일 두 개의 쓰레드가 동일한 시간을 대기로 구현한다면 서로 지정된 시간이 끝날 때 까지 
+	   쓰레드가 실행 되지 않은 "교착 상태"가 된다.
+	   
+A thread state. A thread can be in one of the following states:
+NEW
+A thread that has not yet started is in this state.
+RUNNABLE
+A thread executing in the Java virtual machine is in this state.
+BLOCKED
+A thread that is blocked waiting for a monitor lock is in this state.
+WAITING
+A thread that is waiting indefinitely for another thread to perform a particular action is in this state.
+TIMED_WAITING
+A thread that is waiting for another thread to perform an action for up to a specified waiting time is in this state.
+TERMINATED
+A thread that has exited is in this state.
+	   
+	   
+
+### com.test01 : 동기화 확인<쓰레드 간의 약속>
+
+Object : wait()[현재 스레드를 대기상태로 풀] -> notify()[대기상태 풀에 있는 스레드를 실행으로] -> notifyAll()[대기상태 풀에 있는 스레드를 실행으로]
+		
+synchronized : 메소드선언부분, 메소드 안에서 synchronized(this) { } 안에 코드를 
+			     작성한다. 
+			ex) public synchronized void push(char c) {}
+			ex) public void push(char c ){ synchronized(this) {} }
+			
+			
+			
+### com.test02 : java.net 클래스를 이용해서 URL 탐색
+
+### com.test03 :  UDP /TCP
+
+
+
+
+
