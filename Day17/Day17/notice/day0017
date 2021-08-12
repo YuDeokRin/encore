@@ -1,0 +1,63 @@
+Day17
+
+2021.08.12
+
+1. 웹 구동[Web Application Server : WAS] 원리와 클라이언트 및 서버의 데이터 연동을 설명할 수 있다.
+
+2. InetAddress 객체를 이용한 주소 탐색을 구현할 수 있다.
+
+3. UDP / TCP의 통신을 구현할 수 있다.
+
+4. java.net의 클래스들을 이해하고 설명할 수 있으며 소켓에 대한 개념을 설명할 수 있다.
+
+---------------------------------------------------
+
+금, 월, 화, 수 [오후], 목 [database = Oracle] / 월, 화 = 강사와 수다
+
+
+어제 복습
+
+1. Window -> Tomcat = 이클립스 <- Tomcat
+
+2. MyWeb WebProject = http:// = web으로 연동하는 프로젝트
+
+3. 내가 만든 자바 프로젝트를 표준출력을 브라우저로 연동해 주세요 
+	WebApplication Server : WAS
+	
+4. MyWeb
+-> context = http://localhost:8080/MyWeb/b.html
+	-src ->java
+	-WebContent : 웹 추가lib, img, css, js, 정적페이지, 동적페이지 
+		-mytest
+			-a.html
+		-b.html
+		-META-INF : 프로젝트 속성 정보 context.xml
+		-WEB-INF : web.xml/ lib
+		
+apache-tomcat9.0.52 -> log
+ catalina - 톰캣의 실행 정보
+ localhost - context의 실행정보
+ localhost_access_log - 클래이언트 의 접속정보
+ 
+ apache-tomcat9.0.52 안에 폴더
+ 
+ webapps  - context
+ 		  - 동적페이지 *.jsp -> .java -> .class
+ 
+-------------------------------------------------------
+
+### com.test  : URL, InetAddres 클래스 연동
+
+
+### com.test01 : UDP 연동
+
+DatagramPacket : 데이터를 패킷단위로 연동해서 전송하는 객체
+DatagramSocket :  UDP 서버와 클라이언트 객체를 생성
+DatagramSocketlmpl :  DatagramSocket의 속성값을 가지며  DatagramSocket의 생성자 또는 메소드의 매개인자로 값을 전달 및 변경한다.
+
+
+### com.test02 : TCP 연동
+ 
+### com.test03 : 멀티 채팅
+	 	   
+		
