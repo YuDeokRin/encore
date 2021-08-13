@@ -1,22 +1,22 @@
 # 2021.08.13
 
-# Áö³×¸¯½º(Generics)
+# ì§€ë„¤ë¦­ìŠ¤(Generics)
 
-JDK1.5¿¡¼­ Ã³À½ µµÀÔµÈ Áö³×¸¯½º
+JDK1.5ì—ì„œ ì²˜ìŒ ë„ìž…ëœ ì§€ë„¤ë¦­ìŠ¤
 
-## Áö³×¸¯½º¶õ?
+## ì§€ë„¤ë¦­ìŠ¤ëž€?
 
-- Áö³×¸¯½º´Â ´Ù¾çÇÑ Å¸ÀÔÀÇ °´Ã¼µéÀ» ´Ù·ç´Â ¸Þ¼­µå³ª ÄÃ·º¼Ç Å¬·¡½º¿¡ ÄÄÆÄÀÏ ½ÃÀÇ Å¸ÀÔÃ¼Å©(complie-time type check)¸¦ ÇØÁÖ´Â ±â´ÉÀÌ´Ù.
-  °´Ã¼ÀÇ Å¸ÀÔÀ» ÄÄÆÄÀÏ ½Ã¿¡ Ã¼Å©ÇÏ±â ¶§¹®¿¡ °´Ã¼ÀÇ Å¸ÀÔÀÇ ¾ÈÁ¤¼ºÀ» ³ôÀÌ°í Çüº¯È¯ÀÇ ¹ø°Å·Î¿òÀÌ ÁÙ¾îµç´Ù.
-Å¸ÀÔ ¾ÈÁ¤¼ºÀ» ³ôÀÎ´Ù´Â °ÍÀº ÀÇµµÇÏÁö ¾ÊÀº Å¸ÀÔÀÇ °´Ã¼°¡ ÀúÀåµÇ´Â °ÍÀ» ¸·°í, ÀúÀåµÈ °´Ã¼¸¦ ²¨³»¿Ã ¶§ ¿ø·¡ÀÇ Å¸ÀÔ°ú ´Ù¸¥ Å¸ÀÔÀ¸·Î Àß¸ø Çüº¯È¯µÇ¾î ¹ß»ýÇÒ ¼ö ÀÖ´Â ¿À·ù¸¦ ÁÙ¿©ÁØ ´Ù´Â ¶æÀÌ´Ù.
+- ì§€ë„¤ë¦­ìŠ¤ëŠ” ë‹¤ì–‘í•œ íƒ€ìž…ì˜ ê°ì²´ë“¤ì„ ë‹¤ë£¨ëŠ” ë©”ì„œë“œë‚˜ ì»¬ë ‰ì…˜ í´ëž˜ìŠ¤ì— ì»´íŒŒì¼ ì‹œì˜ íƒ€ìž…ì²´í¬(complie-time type check)ë¥¼ í•´ì£¼ëŠ” ê¸°ëŠ¥ì´ë‹¤.
+  ê°ì²´ì˜ íƒ€ìž…ì„ ì»´íŒŒì¼ ì‹œì— ì²´í¬í•˜ê¸° ë•Œë¬¸ì— ê°ì²´ì˜ íƒ€ìž…ì˜ ì•ˆì •ì„±ì„ ë†’ì´ê³  í˜•ë³€í™˜ì˜ ë²ˆê±°ë¡œì›€ì´ ì¤„ì–´ë“ ë‹¤.
+íƒ€ìž… ì•ˆì •ì„±ì„ ë†’ì¸ë‹¤ëŠ” ê²ƒì€ ì˜ë„í•˜ì§€ ì•Šì€ íƒ€ìž…ì˜ ê°ì²´ê°€ ì €ìž¥ë˜ëŠ” ê²ƒì„ ë§‰ê³ , ì €ìž¥ëœ ê°ì²´ë¥¼ êº¼ë‚´ì˜¬ ë•Œ ì›ëž˜ì˜ íƒ€ìž…ê³¼ ë‹¤ë¥¸ íƒ€ìž…ìœ¼ë¡œ ìž˜ëª» í˜•ë³€í™˜ë˜ì–´ ë°œìƒí•  ìˆ˜ ìžˆëŠ” ì˜¤ë¥˜ë¥¼ ì¤„ì—¬ì¤€ ë‹¤ëŠ” ëœ»ì´ë‹¤.
 
 
-- Áö³×¸¯½ºÀÇ ÀåÁ¡
-1) Å¸ÀÔ ¾ÈÁ¤¼ºÀ» Á¦°øÇÑ´Ù.
-2) Å¸ÀÔÃ¼Å©¿Í Çüº¯È¯À» »ý·«ÇÒ ¼ö ÀÖÀ¸¹Ç·Î ÄÚµå°¡ °£°áÇØ Áø´Ù.
+- ì§€ë„¤ë¦­ìŠ¤ì˜ ìž¥ì 
+1) íƒ€ìž… ì•ˆì •ì„±ì„ ì œê³µí•œë‹¤.
+2) íƒ€ìž…ì²´í¬ì™€ í˜•ë³€í™˜ì„ ìƒëžµí•  ìˆ˜ ìžˆìœ¼ë¯€ë¡œ ì½”ë“œê°€ ê°„ê²°í•´ ì§„ë‹¤.
   
 
-### Áö³×¸¯ Å¬·¡½ºÀÇ ¼±¾ð 
+### ì§€ë„¤ë¦­ í´ëž˜ìŠ¤ì˜ ì„ ì–¸ 
 
 ```java
 class Box{
@@ -27,9 +27,9 @@ class Box{
 }	
 ```
 
-À§ Å¬·¡½º¸¦ Áö³×¸¯ Å¬·¡½º·Î º¯°æÇÏ¸é ´ÙÀ½°ú °°ÀÌ Å¬·¡½º ¿·¿¡ '<T>'¸¦ ºÙÀÌ¸é µÈ´Ù. ±×¸®°í Object¸¦ ¸ðµÎ 'T'·Î ¹Ù²Û´Ù.
+ìœ„ í´ëž˜ìŠ¤ë¥¼ ì§€ë„¤ë¦­ í´ëž˜ìŠ¤ë¡œ ë³€ê²½í•˜ë©´ ë‹¤ìŒê³¼ ê°™ì´ í´ëž˜ìŠ¤ ì˜†ì— '<T>'ë¥¼ ë¶™ì´ë©´ ëœë‹¤. ê·¸ë¦¬ê³  Objectë¥¼ ëª¨ë‘ 'T'ë¡œ ë°”ê¾¼ë‹¤.
 ```java
-class Box<T>{  // Áö³×¸¯ Å¸ÀÔ T¸¦ ¼±¾ð
+class Box<T>{  // ì§€ë„¤ë¦­ íƒ€ìž… Të¥¼ ì„ ì–¸
 	T item;
 		
 	void setItem(T item) {this.item = item;}
@@ -43,20 +43,20 @@ class Box<T>{  // Áö³×¸¯ Å¸ÀÔ T¸¦ ¼±¾ð
 - V(Value)
 
 
-Áö³×¸¯ Å¬·¡½º°¡ µÈ BoxÅ¬·¡½ºÀÇ °´Ã¼¸¦ »ý¼ºÇÒ ¶§´Â ´ÙÀ½°ú °°ÀÌ ÂüÁ¶º¯¼ö¿Í »ý¼ºÀÚ¿¡ Å¸ÀÔ T´ë½Å¿¡ »ç¿ëµÉ ½ÇÁ¦ Å¸ÀÔÀ» ÁöÁ¤ÇØÁÖ¾î¾ß ÇÑ´Ù.<br>
+ì§€ë„¤ë¦­ í´ëž˜ìŠ¤ê°€ ëœ Boxí´ëž˜ìŠ¤ì˜ ê°ì²´ë¥¼ ìƒì„±í•  ë•ŒëŠ” ë‹¤ìŒê³¼ ê°™ì´ ì°¸ì¡°ë³€ìˆ˜ì™€ ìƒì„±ìžì— íƒ€ìž… TëŒ€ì‹ ì— ì‚¬ìš©ë  ì‹¤ì œ íƒ€ìž…ì„ ì§€ì •í•´ì£¼ì–´ì•¼ í•œë‹¤.<br>
 
 ```java
-Box<String> b = new Box<String>();	// Å¸ÀÔ T´ë½Å, ½ÇÁ¦ Å¸ÀÔÀ» ÁöÁ¤
-b.setItem(new Object());			// ¿¡·¯. StringÀÌ¿ÜÀÇ Å¸ÀÔÀº ÁöÁ¤ºÒ°¡
-b.setItem("ABC");					// OK. String Å¸ÀÔÀÌ¹Ç·Î °¡´É
-String item = ~~(String)~~ b.getItem();	// Çüº¯È¯ÀÌ ÇÊ¿ä ¾øÀ½ 
+Box<String> b = new Box<String>();	// íƒ€ìž… TëŒ€ì‹ , ì‹¤ì œ íƒ€ìž…ì„ ì§€ì •
+b.setItem(new Object());			// ì—ëŸ¬. Stringì´ì™¸ì˜ íƒ€ìž…ì€ ì§€ì •ë¶ˆê°€
+b.setItem("ABC");					// OK. String íƒ€ìž…ì´ë¯€ë¡œ ê°€ëŠ¥
+String item = ~~(String)~~ b.getItem();	// í˜•ë³€í™˜ì´ í•„ìš” ì—†ìŒ 
 ```
 
-À§ÀÇ ÄÚµå¿¡¼­ Å¸ÀÔ T´ë½Å¿¡ StringÅ¸ÀÔÀ» ÁöÁ¤ÇØÁáÀ¸¹Ç·Î, Áö³×¸¯ Å¬·¡½º Box<T>´Â ´ÙÀ½°ú °°ÀÌ Á¤ÀÇµÈ °Í°ú °°´Ù.
+ìœ„ì˜ ì½”ë“œì—ì„œ íƒ€ìž… TëŒ€ì‹ ì— Stringíƒ€ìž…ì„ ì§€ì •í•´ì¤¬ìœ¼ë¯€ë¡œ, ì§€ë„¤ë¦­ í´ëž˜ìŠ¤ Box<T>ëŠ” ë‹¤ìŒê³¼ ê°™ì´ ì •ì˜ëœ ê²ƒê³¼ ê°™ë‹¤.
 
 ```java
 
-class Box{ // Áö³×¸¯ Å¸ÀÔÀ» StringÀ¸·Î ÁöÁ¤
+class Box{ // ì§€ë„¤ë¦­ íƒ€ìž…ì„ Stringìœ¼ë¡œ ì§€ì •
 	String item;
 	void setItem(String item){ this.item = item;}
 	String getItem() {return item;}
@@ -65,32 +65,32 @@ class Box{ // Áö³×¸¯ Å¸ÀÔÀ» StringÀ¸·Î ÁöÁ¤
 ```
 
 
-Áö³×¸¯ÀÌ µµÀÔµÇ±â ÀÌÀüÀÇ ÄÚµå¿Í È£È¯À» À§ÇØ, Áö³×¸¯ Å¬·¡½ºÀÎµ¥µµ ¿¹ÀüÀÇ ¹æ½ÄÀ¸·Î °´Ã¼¸¦ »ý¼ºÇÏ´Â °ÍÀÌ Çã¿ëµÈ´Ù.<br>
-´Ù¸¸ Áö³×¸¯ Å¸ÀÔÀ» ÁöÁ¤ÇÏÁö ¾Ê¾Æ¼­ ¾ÈÀüÇÏÁö ¾Ê´Ù´Â °æ°í°¡ ¹ß»ýÇÑ´Ù.<br>
+ì§€ë„¤ë¦­ì´ ë„ìž…ë˜ê¸° ì´ì „ì˜ ì½”ë“œì™€ í˜¸í™˜ì„ ìœ„í•´, ì§€ë„¤ë¦­ í´ëž˜ìŠ¤ì¸ë°ë„ ì˜ˆì „ì˜ ë°©ì‹ìœ¼ë¡œ ê°ì²´ë¥¼ ìƒì„±í•˜ëŠ” ê²ƒì´ í—ˆìš©ëœë‹¤.<br>
+ë‹¤ë§Œ ì§€ë„¤ë¦­ íƒ€ìž…ì„ ì§€ì •í•˜ì§€ ì•Šì•„ì„œ ì•ˆì „í•˜ì§€ ì•Šë‹¤ëŠ” ê²½ê³ ê°€ ë°œìƒí•œë‹¤.<br>
 
 ```java
-Box b= new Box();		//OK. T´Â Object·Î °£ÁÖµÈ´Ù. <br>
-b.setItem("ABC");		//°æ°í. unchecked or unsafe operation<br>
-b.setItem(new Object());//°æ°í. unchecked or unsafe operation<br>
+Box b= new Box();		//OK. TëŠ” Objectë¡œ ê°„ì£¼ëœë‹¤. <br>
+b.setItem("ABC");		//ê²½ê³ . unchecked or unsafe operation<br>
+b.setItem(new Object());//ê²½ê³ . unchecked or unsafe operation<br>
 ```
 
-¾Æ·¡¿Í °°ÀÌ Å¸ÀÔ º¯¼ö T¿¡ ObjectÅ¸ÀÔÀ» ÁöÁ¤ÇÏ¸é, Å¸ÀÔÀ» ÁöÁ¤ÇÏÁö ¾ÊÀº °ÍÀÌ ¾Æ´Ï¶ó ¾Ë°í ÀûÀº °ÍÀÌ¹Ç·Î °æ°í´Â ¹ß»ýÇÏÁö ¾Ê´Â´Ù.
+ì•„ëž˜ì™€ ê°™ì´ íƒ€ìž… ë³€ìˆ˜ Tì— Objectíƒ€ìž…ì„ ì§€ì •í•˜ë©´, íƒ€ìž…ì„ ì§€ì •í•˜ì§€ ì•Šì€ ê²ƒì´ ì•„ë‹ˆë¼ ì•Œê³  ì ì€ ê²ƒì´ë¯€ë¡œ ê²½ê³ ëŠ” ë°œìƒí•˜ì§€ ì•ŠëŠ”ë‹¤.
 
 ```java
 Box<Object> b = new Box<Object>();
-b.setItem("ABC");		//°æ°í ¹ß»ý ¾ÈÇÔ.
-b.setItem(new Object())	//°æ°í ¹ß»ý ¾ÈÇÔ. 
+b.setItem("ABC");		//ê²½ê³  ë°œìƒ ì•ˆí•¨.
+b.setItem(new Object())	//ê²½ê³  ë°œìƒ ì•ˆí•¨. 
 ```
 
-### Áö³×¸¯½ºÀÇ ¿ë¾î
-Áö³×¸¯½º¿¡¼­ »ç¿ëµÇ´Â ¿ë¾îµéÀº ÀÚÄ© Çò°¥¸®±â ½±´Ù. Áøµµ¸¦ ´õ ³ª°¡±â Àü¿¡, Áö³×¸¯½ºÀÇ ¿ë¾î¸¦ ¸ÕÀú Á¤¸®ÇÏ°í ³Ñ¾î°®.
+### ì§€ë„¤ë¦­ìŠ¤ì˜ ìš©ì–´
+ì§€ë„¤ë¦­ìŠ¤ì—ì„œ ì‚¬ìš©ë˜ëŠ” ìš©ì–´ë“¤ì€ ìžì¹« í—·ê°ˆë¦¬ê¸° ì‰½ë‹¤. ì§„ë„ë¥¼ ë” ë‚˜ê°€ê¸° ì „ì—, ì§€ë„¤ë¦­ìŠ¤ì˜ ìš©ì–´ë¥¼ ë¨¼ì € ì •ë¦¬í•˜ê³  ë„˜ì–´ê°–.
 
-<»çÁø1>
+<img src = "https://user-images.githubusercontent.com/56623911/129363431-e25fc102-e03e-4b37-8e9f-c2e39999ca6e.png" width="40%" height="30%">
 
 
-Box<T> : Áö³×¸¯ Å¬·¡½º. 'TÀÇ Box'¶Ç´Â 'T Box'¶ó°í ÀÐ´Â´Ù.
-T : Å¸ÀÔ º¯¼ö ¶Ç´Â Å¸ÀÔ ¸Å°³º¯¼ö.(T´Â Å¸ÀÔ¹®ÀÚ)
-Box : ¿ø½ÃÅ¸ÀÔ(raw type)
+Box<T> : ì§€ë„¤ë¦­ í´ëž˜ìŠ¤. 'Tì˜ Box'ë˜ëŠ” 'T Box'ë¼ê³  ì½ëŠ”ë‹¤.
+T : íƒ€ìž… ë³€ìˆ˜ ë˜ëŠ” íƒ€ìž… ë§¤ê°œë³€ìˆ˜.(TëŠ” íƒ€ìž…ë¬¸ìž)
+Box : ì›ì‹œíƒ€ìž…(raw type)
 
 
 
