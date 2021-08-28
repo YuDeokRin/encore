@@ -10,7 +10,9 @@
 
 3) 기타등등 
 
-![Untitled](Day26%20be0e1b8bf7e84de5aa6531bf4a884360/Untitled.png)
+
+![Untitled](https://user-images.githubusercontent.com/56623911/131220674-14e8b7ca-0688-4dd1-8242-b70e43ff7301.png)
+
 
 ### ROUNUM
 
