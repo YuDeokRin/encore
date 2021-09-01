@@ -108,8 +108,7 @@ SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
 CONSTRAINT_NAME                                              CO
 
 ---------------------------------------------------------------
-
-SYS_C007069                                                          C
+SYS_C007069                                                   C
 ```
 
 Q2) NOT NULL 을 확인 해보자.
