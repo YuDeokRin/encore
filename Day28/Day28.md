@@ -1,0 +1,487 @@
+# Day28
+
+## 2021.09.02
+
+## 1. 뷰, 시퀀스, 인덱스 등을 구현하고 활용할 수 있다.
+
+## 2. 뷰와 테이블의 장단점을 기술할 수 있다.
+
+## 3. 뷰 생성 및 구현 수정과 삭제 구문을 활용할 수 있다.
+
+## 4. 인덱스의 개념을 이해할 수 있다.
+
+Q1) 테이블 수정
+
+CREATE TABLE TB_EXAM(
+COL1 CHAR(3) PRIMARY KEY,
+ENAME VARCHAR2(20),
+FOREIGN KEY(COL1) REFERENCES EMPLOYEE); → EMPLOYEE의 PK를 참조하게 된다.
+
+Q2)컬럼이름을 조회하자. 
+SELECT COLUMN_NAME
+FROM USER_TAB_COLS - - > 생성된 테이블의 정보를 가진 테이블
+WHERE TABLE_NAME = 'TB_EXAM';
+
+DESC USER_TABL_COLS;
+
+Q3) 
+
+SELECT CONSTRAINT_NAME AS 이름,
+CONSTRAINT_TYPE AS 유형,
+COLUMN_NAME AS 컬럼,
+R_CONSTRAINT_NAME AS 참조,
+DELETE_RULE AS 삭제규칙
+FROM USER_CONSTRAINTS
+JOIN USER_CONS_COLUMNS
+USING (CONSTRAINT_NAME, TABLE_NAME)
+WHERE TABLE_NAME ='TB_EXAM';
+
+--Q4) Q1에서 생성한 테이블의 컬럼 이름을 변경 COL1 -> EMPID
+ALTER TABLE TB_EXAM
+RENAME COLUMN COL1 TO EMPID;
+
+--확인
+DESC TB_EXAM;
+
+--Q5) 제약 조건 이름 변경 SYS_C007100 -> PK_EID
+ALTER TABLE TB_EXAM
+RENAME CONSTRAINT SYS_C007100 TO PK_EID;
+
+--Q6) 참조제약조건의 이름을 FK_EID을 변경해보자.
+
+ALTER TABLE TB_EXAM
+RENAME CONSTRAINT SYS_C007101 TO FK_EID;
+
+--Q7) 테이블 이름 변경
+ALTER TABLE TB_EXAM RENAME TO TB_SAMPLE;
+
+RENAME TB_EXAM TO TB_SAMPLE;
+
+--Q8)테이블 삭제
+DROP TABLE TABLE_NAME [CASCADE CONSTRAINTS];
+
+- 포함된 데이터 및 테이블과 관련된 데이터 딕셔너리 정보까지 모두 삭제
+- 삭제 작업은 복구할 수 없다.
+-CASCADE CONSTRAINTS : 삭제 대상 테이블의 PK또는 U 제약조건을 참조하는 다른 제약조건을 삭제하는 옵션,
+참조중인 제약조건이 있는 경우에 옵션이 미 사용시 삭제 할 수 없다.
+
+CREATE TABLE MY_DEPT(
+DID CHAR(2) PRIMARY KEY,
+DNAME VARCHAR(20));
+
+CREATE TABLE MY_EMP02(
+COL1 CHAR(3) PRIMARY KEY,
+ENAME VARCHAR2(20),
+DID CHAR(2) REFERENCES MY_DEPT);
+
+SELECT * FROM MY_DEPT;
+
+DROP TABLE MY_DEPT CASCADE CONSTRAINTS;
+DROP TABLE MY_EMP02;
+
+INSERT INTO MY_DEPT VALUES(10, '10');
+INSERT INTO MY_DEPT VALUES(20, '10');
+INSERT INTO MY_DEPT VALUES(30, '10');
+INSERT INTO MY_DEPT VALUES(40, '10');
+
+SELECT * FROM MY_DEPT;
+
+INSERT INTO MY_EMP02 VALUES(1, '1', 10);
+INSERT INTO MY_EMP02 VALUES(2, '2', 40);
+
+SELECT * FROM MY_EMP02;
+
+SELECT CONSTRAINT_NAME AS 이름,
+CONSTRAINT_TYPE AS 유형,
+COLUMN_NAME AS 컬럼,
+R_CONSTRAINT_NAME AS 참조,
+DELETE_RULE AS 삭제규칙
+FROM USER_CONSTRAINTS
+JOIN USER_CONS_COLUMNS
+USING (CONSTRAINT_NAME, TABLE_NAME)
+WHERE TABLE_NAME IN('MY_DEPT', 'MY_EMP02');
+
+DROP TABLE MY_DEPT CASCADE CONSTRAINTS;
+SELECT * FROM MY_EMP02;
+
+--Q9)컬럼(COLUMN) 삭제 : 삭제되는 컬럼을 참조하고 있는 다른 컬럼에 설정된 제약조건까지 함께 삭제한다.
+CREATE TABLE TB1(
+PK NUMBER PRIMARY KEY,
+FK NUMBER REFERENCES TB1,
+COL1 NUMBER,
+CHECK(PK > 0 AND COL1 > 0));
+
+SELECT CONSTRAINT_NAME AS 이름,
+CONSTRAINT_TYPE AS 유형,
+COLUMN_NAME AS 컬럼,
+R_CONSTRAINT_NAME AS 참조,
+DELETE_RULE AS 삭제규칙
+FROM USER_CONSTRAINTS
+JOIN USER_CONS_COLUMNS
+USING (CONSTRAINT_NAME, TABLE_NAME)
+WHERE TABLE_NAME = 'TB1';
+
+- -컬럼 삭제
+ALTER TABLE TB1
+DROP (PK) CASCADE CONSTRAINTS;
+- - 오류 보고 -
+-- ORA-12992: cannot drop parent key column
+-- 12992. 00000 - "cannot drop parent key column"
+
+ALTER TABLE TB1
+DROP (COL1)CASCADE CONSTRAINTS;
+-- 오류 보고 -
+-- ORA-12991: column is referenced in a multi-column constraint
+-- 12991. 00000 -  "column is referenced in a multi-column constraint"
+
+Q10) VIEW : 다른 테이블이나 뷰에 포함된 데이터의 맞춤 표현
+-STORED QUERY, VIRTUAL TABLE로 간주되는 데이터 베이스 객체
+-한 개 이상의 (1 MORE)  테이블/뷰에 포함된 데이터 부분 집합을 나타내는 논리적인 객체
+-자체적으로 데이터를 포함하지 않는다.
+-베이스 테이블에 있는 데이터를 조건이나 또는 조인 등을 이용해서 참조하는 형식
+
+사용목적 및 장점
+-Restricted data access : 뷰에 접근하는 사용자는 미리 정의된 결과만 볼 수 있다.( 데이터 보호)
+
+- Hide data complexity : 여러테이블을 조인하게 되면 복잡한 SQL을 숨길 수 있다.
+- Smiplify satement for the user : SQL구문을 몰라도 간단한 Select 구문만으로도 원하는 결과를 조회할 수 있다.
+- Present the data in a different perspective : 뷰에 포함되는 컬럼은 참조 대상 테이블에 영향을 주지 않고 다른 이름으로 참조가 가능하다.
+- lsolate applications from changes in definittions of base tables : 베이스 테이블에 포함된 여러 개
+컬럼 중 일부만 사용하도록 뷰를 생성할 경우 뷰가 참조 되지 않는 나머지 컬럼이 변경되어도 뷰를 사용하는 다른 프로그램 영향을 받지 않는다.
+- Save commplex queries : 자주 사용하는 복잡한 SQL문을 뷰형태로 저장하면 반복적으로 사용 가능
+
+생성 구문
+CREATE [OR REPLACE] [FORCE | NOFRCE]  VIEW view_name[(alias [,alias,,,])]
+AS subquery
+[WITH CHECK OPTION [CONSTRAINT constraint_name]]
+[WITH READ ONLY [CONSTRAINT constraint_name]]
+
+[구문 설명]
+CREATE [OR REPLACE]: 지정한 뷰가 없으면 새로 생성, 동일이 존재하면 수정(over_write)
+[FORCE | NOFRCE] : 원본 테이블이 존재하지 않아도 뷰 생성 가능  | 존재하는 경우에만 뷰 생성 가능
+alias : 뷰에서 사용할 이름
+subquery
+제약조건 :
+WITH CHECK OPTION : 뷰를 통해 접근 가능한 데이터 베이스에 대해서만 DML 작업 허용
+WITH READ ONLY : 뷰를 통해 DML작업 허용 안하겠다.
+
+Q11) 사원테이블에서 부서번호가 90번 데이터를 가진 V_EMP인 VIEW를 생성해보자
+CREATE OR REPLACE VIEW V_EMP
+AS SELECT EMP_NAME, DEPT_ID
+FROM EMPLOYEE
+WHERE DEPT_ID = '90';
+
+SELECT * FROM V_EMP;
+
+SELECT COLUMN_NAME, DATA_TYPE, NULLABLE
+FROM USER_TAB_COLS
+WHERE TABLE_NAME = 'V_EMP';
+
+--Q12)직급이 사원인 사원의 이름, 부서명, 직급을 출력하는 V_EMP_DEPT_JOB 이름의 VIEW를 생성해보자.
+CREATE OR REPLACE VIEW V_EMP_DEPT_JOB
+AS SELECT EMP_NAME, DEPT_NAME, JOB_TITLE
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT USING(DEPT_ID)
+LEFT JOIN JOB USING(JOB_ID)
+WHERE JOB_TITLE= '사원';
+
+SELECT COLUMN_NAME, DATA_TYPE,NULLABLE
+FROM USER_TAB_COLS
+WHER TABLE_NAME = 'V_EMP_DEPT_JOB';
+
+SELECT * FROM EMPLOYEE;
+SELECT * FROM DEPARTMENT;
+SELECT * FROM V_EMP_DEPT_JOB;
+
+Q13)별칭을 사용한 VIEW 생성
+CREATE OR REPLACE VIEW V_EMP_DEPT_JOB(ENM, DNM, TITLE)
+AS SELECT EMP_NAME, DEPT_NAME, JOB_TITLE
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT USING(DEPT_ID)
+LEFT JOIN JOB USING(JOB_ID)
+WHERE JOB_TITLE= '사원';
+
+CREATE OR REPLACE VIEW V_EMP_DEPT_JOB
+AS SELECT EMP_NAME AS A1, DEPT_NAME D1 , JOB_TITLE T1
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT USING(DEPT_ID)
+LEFT JOIN JOB USING(JOB_ID)
+WHERE JOB_TITLE= '사원';
+
+Q14) 조건 함수를 사용한 VIEW 생성
+CREATE OR REPLACE VIEW V_EMP("ENM",    "GENDER",    "YEARS")
+AS
+SELECT  EMP_NAME,
+DECODE(SUBSTR(EMP_NO,8,1),'1','남자','3','남자','여자'),
+ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)/12,0)
+FROM EMPLOYEE;
+
+-- < 별칭이 없는 경우 오류가 발생한다. CASE1: >>
+CREATE OR REPLACE VIEW V_EMP
+AS
+SELECT EMP_NAME,
+DECODE(SUBSTR(EMP_NO,8,1),'1','남자','3','남자','여자'),
+ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)/12,0)
+FROM EMPLOYEE;
+--오류 보고 -
+--ORA-00998: must name this expression with a column alias
+
+-- < 오류가 발생한다. CASE2: >>
+CREATE OR REPLACE VIEW V_EMP ("GENDER", "YEARS")
+AS
+SELECT EMP_NAME,
+DECODE(SUBSTR(EMP_NO,8,1),'1','남자','3','남자','여자'),
+ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)/12,0)
+FROM EMPLOYEE;
+--오류 보고 -
+--ORA-01730: invalid number of column names specified
+
+-- < 실행 가능. CASE3: >>
+CREATE OR REPLACE VIEW V_EMP
+AS
+SELECT EMP_NAME,
+DECODE(SUBSTR(EMP_NO,8,1),'1','남자','3','남자','여자') AS GENDER,
+ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)/12,0) AS YEARS
+FROM EMPLOYEE;
+
+Q15) 뷰생성 제약조건 : WITH READ ONLY
+CREATE OR REPLACE VIEW V_EMP
+AS
+SELECT * FROM EMPLOYEE
+WITH READ ONLY;
+-- > DML 허용하지 않는다.
+
+UPDATE V_EMP
+SET PHONE = NULL;
+INSERT INTO V_EMP(EMP_ID, EMP_NAME, EMP_NO)
+VALUES ('777','홍길동',  '666666-6666666');
+
+Q16) 뷰생성 제약조건 : WITH CHECK OPTION - 조건에 따라 INSERT/ UPDATE 작업 제한 (DELETE는 제한 없음)
+CREATE OR REPLACE VIEW V_EMP
+AS
+SELECT EMP_ID, EMP_NAME, EMP_NO, MARRIAGE
+FROM EMPLOYEE
+WHERE MARRIAGE = 'N'
+WITH CHECK OPTION;
+INSERT INTO V_EMP(EMP_ID, EMP_NAME, EMP_NO, MARRIAGE)
+VALUES ('777','홍길동',  '666666-6666666','Y');
+
+UPDATE V_EMP
+SET PHONE = NULL;
+
+INSERT INTO V_EMP(EMP_ID,EMP_NAME, EMP_NO)
+VALUES('777','홍길동','666666-6666666');
+
+DELETE FROM V_EMP;
+
+Q17) 뷰 - 데이터 조회 절차
+뷰를 사용한 SQL 구문해석 -> 데이터 딕셔너리 "USER_VIEWS"에서 뷰 정의 검색
+-> SQL 구문을 실행한 계정이 관련된 베이스 테이블(원본) 테이블에 접근하여 SELECT 권한 확인
+-> 뷰 대신 원본 테이블을 기반으로 하는 동등한 작업으로 변환
+-> 베이스 테이블(원본)을 대상으로 데이터를 조회
+
+Q18) 뷰 삭제 -> DROP VIEW VIEW_NAME;
+
+Q19) 시퀀스 개념 : 순차적으로 정수 값을 자동으로 생성하는 객체 .nextval .currval
+CAEATE SQUENCE user_name
+INCREMENT BY n    -> 시퀀스 번호 증가/감소 (Default 1)
+START WITH n -> 시퀀스 시작 값
+{MAXVALUE n| NOMAXVALUE} : 10의 27승(10^27)을 깃점으로 사용된다.
+{MINVALUE n| NOMINVALUE} : -10의 26승을 깃점으로 사용된다.
+{CYCLE | NOCYCLE} -최대/최소 값 도달하게 되면 반복 여부 결정
+{CACHE n| NOCACHE} - 지정한 수량 만큼 미리 메모리에 생성여부 결정(최소값 2, 기본값20)
+
+--Q20) 300부터 310번까지 5개씩 증가되는 SEQ_EMPID라는 객체를 만들자.
+CREATE SEQUENCE SEQ_EMPID
+START WITH 300
+INCREMENT BY 5
+MAXVALUE 310
+NOCYCLE
+NOCACHE;
+
+SELECT SEQ_EMPID.NEXTVAL
+FROM DUAL;
+
+SELECT SEQ_EMPID.CURRVAL
+FROM DUAL;
+
+SELECT SEQ_EMPID.NEXTVAL FROM DUAL;
+
+Q20) 5부터 15번까지 5개씩 증가되는 SEQ_EMPID02라는 객체를 만들자.
+CREATE SEQUENCE SEQ_EMPID02
+START WITH 5
+INCREMENT BY 5
+MAXVALUE 15
+CYCLE
+CACHE;
+
+SELECT SEQ_EMPID02.NEXTVAL FROM DUAL;
+
+SELECT SEQ_EMPID02.NEXTVAL FROM DUAL;
+
+DESC TEST;
+
+SELECT * FROM TEST;
+
+INSERT INTO TEST(COL1) VALUES(SEQ_EMPID02.NEXTVAL);
+SELECT SEQ_EMPID02.CURRVAL FROM DUAL;
+SELECT * FROM TEST;
+
+SELECT * FROM TEST;
+
+Q21) 시퀀스를 수정해보자 단 시퀀스는 START WITH는 수정할 수 없다 .
+SEQ_EMPID02의 3씩 증가하면서 10까지
+
+ALTER SEQUENCE SEQ_EMPID02
+INCREMENT BY 3
+MAXVALUE 10
+NOCYCLE
+NOCACHE;
+
+SELECT SEQ_EMPID02.CURRVAL FROM DUAL;
+
+CREATE SEQUENCE SEQ_01
+START WITH 1
+INCREMENT BY 3
+MAXVALUE 10
+NOCYCLE
+NOCACHE;
+
+SELECT SEQ_01.CURRVAL FROM DUAL;
+--오류 ORA-08002: sequence SEQ_01.CURRVAL is not yet defined in this session
+
+SELECT SEQ_01.NEXTVAL FROM DUAL;
+
+DESC USER_SEQUENCES;
+
+SELECT * FROM USER_SEQUENCES;
+
+--INDEX
+--Q22) INDEX : 책의 목차와 같은 색인을 의미 한다. EX) INDEX(키워드) -----128P(위치)
+-키워드와 해당 내용의 위치가 정렬된 상태로 구성된다.
+-키워드를 이용해서 내용을 빠르게 찾는목적을 가진다.
+-데이터베이스에서 인덱스는 컬럼값을 이용해서 원하는 행을 빠르게 찾기위한 목적
+
+DEPT 테이블에 DEPTNO가 있다라고 가정
+
+INDEX를 지정하지 않을 경우 :   20 10 50 60 80 90 30 로 나열된 데이터의 (ROWID로 정렬을 한 다음) 데이터를 찾게된다.
+
+INDEX를 DEPTNO로 지정할 경우 : 20 10 50 60 80 90 30 을
+10 20 30 50 60 80 90 정렬을 명시적으로 한 다음 해당 ROWID를 위치로 삼아 찾게 된다.
+
+[생성]
+CREATE [UNIQUE] INDEX index_name ON table_name(column_list | function, expr);
+ex)
+CREATE UNIQUE INDEX IDX_DNM ON DEPARTMENT (DEPT_NAME);
+CREATE INDEX IDX_JID ON EMPLOYEE(JOB_ID);
+
+UNIQUE : 중복값이 포함될 수 없다.
+오라클은 PK 제약고건을 생성하면 자동으로 해당 컬럼에 Unique index를 생성
+PK를 사용하게 되면 access를 하는데 성능 효과를 가진다.
+
+Non_UNIQUE : 빈번하게 사용되는 일반 컬럼을 대상으로 생성함
+
+USER_INDEXES ->정보를 가진 테이블
+SELECT * FROM USER_INDEXES;
+
+USER_IND_COLUMNS -> 인덱스가 지정된 컬럼의 정보
+
+Q23) EMPLOYEE 테이블의 EMP_NAME 컬럼에 IDX_ENM 이름의 UNIQUE INDEX를 생성하시오.
+CREATE UNIQUE INDEX INDX_ENM ON EMPLOYEE(EMP_NAME);
+
+INSERT INTO EMPLOYEE (EMP_ID, EMP_NO, EMP_NAME)
+VALUES ('400', '800000-0000000', '감우섭');  -- -> 중복값 설정 할 수 없다 오류
+
+CREATE UNIQUE INDEX IDX_ENM ON EMPLOYEE(DEPT_ID);
+
+--Q24)EMPPLOYEE에 생성된 인덱스 조회
+SELECT INDEX_NAME, COLUMN_NAME, INDEX_TYPE, UNIQUENESS
+FROM USER_INDEXES
+JOIN USER_IND_COLUMNS USING(INDEX_NAME, TABLE_NAME)
+WHERE TABLE_NAME = 'EMPLOYEE';
+
+--Q25) DML(Data Manipluation Language) : update, insert, delete, transaction, lock
+UPDATE Table_name
+SET column_name =value[, column_name=value,,,,] or subquery, default 옵션
+[WHERE condition]; -> where가 생략되면 전체 행이 갱신된다.
+
+90번 부서의 부서명을 '전략기획팀'으로 변경해 보자.
+
+SELECT * FROM DEPARTMENT;
+
+UPDATE DEPARTMENT
+SET DEPT_NAME='전략기획팀'
+WHERE DEPT_ID = '90';
+
+ROLLBACK;
+
+SELECT * FROM EMPLOYEE;
+--Q26)EMPLOYEE 테이블에서 '심하균'의 직업과 월급을 성해교랑 같은 직업과 월급으로 변경해라
+SELECT EMP_NAME, JOB_ID, SALARY
+FROM EMPLOYEE
+WHERE EMP_NAME IN('성해교','심하균');
+
+UPDATE EMPLOYEE
+SET JOB_ID =(SELECT JOB_ID
+FROM EMPLOYEE
+WHERE EMP_NAME = '성해교'),
+SALARY = (SELECT SALARY
+FROM EMPLOYEE
+WHERE EMP_NAME = '성해교')
+WHERE EMP_NAME = '심하균';
+
+UPDATE EMPLOYEE
+SET (JOB_ID, SALARY ) = SELECT JOB_ID, SALARY
+FROM EMPLOYEE
+WHERE EMP_NAME='성해교')
+WHERE EMP_NAME='심하균';
+
+Q27)DELETE - 테이블 전체 데이터 삭제
+DELETE FROM TEST;
+TRUNCATE TABLE table_name; -- -> 롤백이 불가능, 제약조건이 있는 테이블은 삭제 불가능
+
+Ex)  TRUNCATE TABLE 명령을 사용해서 전체 데이터를 삭제할 때는
+
+1. 참조되는 테이블의 제약조건을 DISABLE 로 지정한다
+ALTER TABLE EMPLOYEE
+DISABLE CONSTRAINTS FK_DEPTID;
+2)전체 내용을 삭제한다.
+
+Q28) 다양한 삭제 룰을 실행 해보자.
+DELETE
+FROM JOB
+WHERE JOB_ID='J2';
+
+DELETE
+FROM EMPLOYEE
+WHERE EMP_ID = '141';
+
+Q29) 주종관계 있을 때 삭제 할 수 없는 상태가 된다. 만일 삭제를 하고 싶다면 삭제 룰에서 SET NULL을 사용한다.
+
+SELECT CONSTRAINT_NAME AS 이름,
+CONSTRAINT_TYPE AS 유형,
+COLUMN_NAME AS 컬럼,
+R_CONSTRAINT_NAME AS 참조,
+DELETE_RULE AS 삭제규칙
+FROM USER_CONSTRAINTS
+JOIN USER_CONS_COLUMNS
+USING (CONSTRAINT_NAME, TABLE_NAME)
+WHERE TABLE_NAME = 'EMPLOYEE';
+
+- -1) 기존 제약 조건을 삭제한다
+ALTER TABLE EMPLOYEE DROP CONSTRAINTS FK_MGRID;
+- -2) 제약조건을 추가하되 옵션을 지정한다.
+ALTER TABLE EMPLOYEE
+ADD CONSTRAINTS FR_MGRID FOREIGN KEY(MGR_ID)
+REFERENCES EMPLOYEE ON DELETE SET NULL;
+- -3)데이터를 삭제한다.
+DELETE
+FROM EMPLOYEE
+WHERE EMP_ID = '141';
+
+SELECT * FROM EMPLOYEE;
+
+Q30) 다양한 삭제 룰을 실행 해보자. 주종 테이블에서 주테이블의 내용이 삭제 될 때 종 테이블의 데이터도 삭제하자.
+DELETE
+FROM JOB
+WHERE JOB_ID='J2';
