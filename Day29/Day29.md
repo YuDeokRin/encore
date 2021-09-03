@@ -35,7 +35,8 @@ SQL>UPDATE ...;
 
 SQL> CREATE OR REPLACE VIEW~~;
 
-![Untitled](Day29%205f4ef447740549dfb10ac9e579c7d531/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/56623911/132020227-0755ac5a-362d-4f8c-abd9-96f9bf8ae0d8.png)
+
 
 트랜잭션 제어
 
@@ -47,9 +48,12 @@ SAVEPOINT savepoint_name : 트랜잭션의 특정 시점을 기록하는 명령
 
 ROLLBACK TO savepoint_name : 지정한 특정 시점으로 데이터 상태를 되돌릴수 있음.
 
-![Untitled](Day29%205f4ef447740549dfb10ac9e579c7d531/Untitled%201.png)
 
-![Untitled](Day29%205f4ef447740549dfb10ac9e579c7d531/Untitled%202.png)
+![Untitled 1](https://user-images.githubusercontent.com/56623911/132020476-23c0943c-fd9e-408f-a3ae-18aea7cd39ea.png)
+
+
+![Untitled 2](https://user-images.githubusercontent.com/56623911/132020487-2cc607dd-55bd-4f5b-b875-90ecf518e567.png)
+
 
 commit :  변경 내용이 데이터 베이스(파일)에 저장 및 반영 
 모든 사용자는 변경된 동일한 결과를 볼 수 있다.
