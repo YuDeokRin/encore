@@ -129,7 +129,7 @@ Q6) 구구단, 홀수 단만 출력해보자.
 
 ```sql
 DECLARE
-		TOTAL NUMBER :=0L
+TOTAL NUMBER :=0L
 BEGIN
 	FRO I IN 2..9 LOOP
 				IF MOD(1,2) != 0 THEN DBMS_OUTPUT.PUT_LINE(I|| '단');
