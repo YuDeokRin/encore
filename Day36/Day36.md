@@ -1,6 +1,6 @@
 # Day36
 
-![Untitled](Day36%20088e06db79d346429a2646e2ee64fb6b/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/56623911/134811386-bc456232-6b85-4888-81a3-a013f8649e5c.png)
 
 ## 2021.09.11
 
